@@ -47,7 +47,7 @@ def reset_offsets_for_topic_in_all_groups(input_args):
         # all(x in ['b', 'a', 'foo', 'bar'] for x in ['a', 'b']) <-- check if all elements ('a','b') are in list ('b','a','foo','bar')
         if all(x in input_args.keys() for x in ['topic', 'offset']):
             reset_topic = input_args['topic']
-            print('will reset topic: {0}'.format(check_empty_arg(reset_topic,'topic')))
+            print('will reset topic: {0}'.format(check_empty_arg(reset_topic, 'topic')))
             reset_date = ''
             if 'offset' == 'to_date':
                 if 'date' in input_args.keys():

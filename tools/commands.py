@@ -51,7 +51,7 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
         reset_mode = {
             'earliest': '--to-earliest',
             'latest': '--to-latest',
-            'to_date': '--to-datetime {0}'.format(check_empty_arg(date_str), 'date'),
+            'to_date': '--to-datetime {0}'.format(check_empty_arg(date_str, 'date')),
         }
         if mode in reset_mode.keys():
             print('will reset {0} : {1}'.format(group_name, topic_name))
