@@ -65,7 +65,7 @@ def reset_offsets_for_topic_in_all_groups(input_args):
                     save_group_offsets(group, offsets_path, about)
 
                 logs_structure[group] = list_group_topics(about)
-                if reset_topic in logs_structure[group]:
+                if reset_topic == '_all_' or reset_topic in logs_structure[group]:
                     reset_topic_offset(group, reset_topic, KAFKA_URL, input_args['offset'], reset_date)
     except Exception as e:
         print(e)
