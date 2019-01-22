@@ -3,15 +3,15 @@ from subprocess import Popen, PIPE
 from argparse import ArgumentParser
 
 
-def run_command(list_cgroup_params):
-    process = Popen(list_cgroup_params, stdout=PIPE, stderr=PIPE)
+def run_command(command_params):
+    process = Popen(command_params, stdout=PIPE, stderr=PIPE)
     p_out, p_err = process.communicate()
     return p_out, p_err
 
 
 def find_file_path(file_name):
     find_params = ['find', '/', '-type', 'f', '-name', file_name]
-    p_out = run_command(find_params)
+    p_out, p_err = run_command(find_params)
     return p_out[:-1]
 
 
