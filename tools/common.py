@@ -15,10 +15,10 @@ def find_file_path(file_name):
     return p_out[:-1]
 
 
-def parse_args(args_list):
+def setup_args(args_list):
     parser = ArgumentParser()
     for arg in args_list:
-        parser.add_argument(arg['short'], arg['full'], dest=arg['dest'], help=arg['help'], matavar=arg['metavar'])
+        parser.add_argument(arg['short'], arg['full'], dest=arg['dest'], help=arg['help'], metavar=arg['metavar'])
 
     return parser.parse_args()
 

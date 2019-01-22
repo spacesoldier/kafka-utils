@@ -30,12 +30,13 @@ def list_group_topics(description_str):
 
 # use this function to backup current offsets for the topics before the reset offsets
 def save_group_offsets(group_name, path, description_str):
-    descr = StringIO.StringIO(description_str)
-    descr_df = pd.read_table(descr, sep='\s+|\t+', header=0, engine='python')
+    if path is not None and path != '':
+        descr = StringIO.StringIO(description_str)
+        descr_df = pd.read_table(descr, sep='\s+|\t+', header=0, engine='python')
 
-    backup_df = descr_df[['TOPIC', 'PARTITION', 'CURRENT-OFFSET']]
-    print(backup_df)
-    write_to_file(path, backup_df.to_csv(), group_name+'.csv')
+        backup_df = descr_df[['TOPIC', 'PARTITION', 'CURRENT-OFFSET']]
+        print(backup_df)
+        write_to_file(path, backup_df.to_csv(), group_name+'.csv')
 
 
 # this function will load previous offsets for the given consumer group from the backup
@@ -50,7 +51,7 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
         reset_mode = {
             'earliest': '--to-earliest',
             'latest': '--to-latest',
-            'to_date': '--to-datetime {0}'.format(check_empty_arg(date_str)),
+            'to_date': '--to-datetime {0}'.format(check_empty_arg(date_str), 'date'),
         }
         if mode in reset_mode.keys():
             print('will reset {0} : {1}'.format(group_name, topic_name))
