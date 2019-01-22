@@ -7,7 +7,7 @@ import pandas as pd
 def list_consumer_groups(server_url):
     script_path = find_file_path('kafka-consumer-groups.sh')
     list_cgroup_params = [script_path, '--bootstrap-server', server_url, '--list']
-    p_out = run_command(list_cgroup_params)
+    p_out, p_err = run_command(list_cgroup_params)
     print(p_out)
     return p_out[:-1].split('\n')
 
@@ -16,7 +16,7 @@ def describe_consumer_group(group_name, server_url):
     print('group: {0}'.format(group_name))
     script_path = find_file_path('kafka-consumer-groups.sh')
     describe_cgroup_params = [script_path, '--bootstrap-server', server_url, '--describe', '--group', group_name]
-    p_out = run_command(describe_cgroup_params)
+    p_out, p_err = run_command(describe_cgroup_params)
     return p_out[:-1]
 
 
