@@ -61,6 +61,9 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
                 script_params.append('--all-topics')
             else:
                 script_params.extend(['--topic', topic_name])
+
+            print(' '.join(script_params))
+
             p_out, p_err = run_command(script_params)
 
             print('errors: {0}'.format(p_err))
