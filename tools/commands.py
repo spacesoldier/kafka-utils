@@ -68,7 +68,7 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
             else:
                 script_params.extend(['--topic', '"' + topic_name + '"'])
 
-            print('run command: '.format(' '.join(script_params)))
+            print('run command: {0}'.format(' '.join(script_params)))
 
             p_out, p_err = run_command(script_params)
 
