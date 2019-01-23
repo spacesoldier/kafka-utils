@@ -5,7 +5,6 @@ from argparse import ArgumentParser
 
 def run_command(command_params):
     process = Popen(command_params, stdout=PIPE, stderr=PIPE)
-    print('process args: {0}'.format(process.args))
     p_out, p_err = process.communicate()
     return p_out, p_err
 
