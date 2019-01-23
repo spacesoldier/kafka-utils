@@ -49,9 +49,10 @@ def reset_offsets_for_topic_in_all_groups(input_args):
             reset_topic = input_args['topic']
             print('will reset topic: {0}'.format(check_empty_arg(reset_topic, 'topic')))
             reset_date = ''
-            if 'offset' == 'to_date':
+            if input_args['offset'] == 'to_date':
                 if 'date' in input_args.keys():
-                    reset_date = check_empty_arg(input_args['date'], 'date')
+                    reset_date = check_empty_arg(input_args['date'], 'DATE')
+
 
             logs_structure = {}
 
