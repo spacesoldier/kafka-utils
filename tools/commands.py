@@ -49,9 +49,9 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
     try:
         #kafka-consumer-groups --bootstrap-server <kafkahost:port> --group <group_id> --topic <topic_name> --reset-offsets --to-earliest
         reset_mode = {
-            'earliest': '--to-earliest',
-            'latest': '--to-latest',
-            'to_date': '--to-datetime "{0}"'.format(check_empty_arg(date_str, 'date')),
+            'earliest': ['--to-earliest'],
+            'latest': ['--to-latest'],
+            'to_date': ['--to-datetime', '"' + check_empty_arg(date_str, 'date') + '"'],
         }
         if mode in reset_mode.keys():
             print('will reset {0} : {1}'.format(group_name, topic_name))
@@ -62,14 +62,14 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
                              '--reset-offsets',
                              '--group',
                              '"' + group_name + '"',
-                             reset_mode[mode]
                              ]
+            script_params.extend(reset_mode[mode])
             if topic_name == '_all_':
                 script_params.append('--all-topics')
             else:
                 script_params.extend(['--topic', '"' + topic_name + '"'])
 
-            print('run command: {0}'.format(script_params)) #' '.join(script_params)))
+            print('run command: {0}'.format(' '.join(script_params)))
 
             p_out, p_err = run_command(script_params)
 
