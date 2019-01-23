@@ -61,13 +61,13 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
                              server_url,
                              '--reset-offsets',
                              '--group',
-                             r'{0}'.format(group_name),
+                             group_name,
                              ]
             script_params.extend(reset_mode[mode])
             if topic_name == '_all_':
                 script_params.append('--all-topics')
             else:
-                script_params.extend(['--topic', r'{0}'.format(topic_name)])
+                script_params.extend(['--topic', topic_name])
 
             print('run command: {0}'.format(' '.join(script_params)))
 
@@ -86,7 +86,7 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
                 # print('check the reset result:')
                 # print(describe_consumer_group(group_name, server_url))
             else:
-                print('consumers running')
+                print('error occured: {0}'.format(p_out))
         else:
             raise Exception('Error: wrong offset argument: {0}'.format(mode))
     except Exception as e:
