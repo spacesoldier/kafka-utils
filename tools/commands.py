@@ -78,12 +78,13 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
             if 'Error' not in p_out:
                 print(p_out)
                 print('then reset')
-                rp_out, rp_err = run_command(script_params.append('--execute'))
-                print(rp_err)
-                print('reset result:')
-                print(rp_out)
-                print('check the reset result:')
-                print(describe_consumer_group(group_name, server_url))
+                # script_params.append('--execute')
+                # rp_out, rp_err = run_command(script_params)
+                # print(rp_err)
+                # print('reset result:')
+                # print(rp_out)
+                # print('check the reset result:')
+                # print(describe_consumer_group(group_name, server_url))
             else:
                 print('consumers running')
         else:
