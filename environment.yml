@@ -1,0 +1,10 @@
+name: kafka-test-env
+
+dependencies:
+  - python=3.5
+  - pandas >= 0.23.0
+  - requests
+  - simplejson
+  - pytz
+  - pip:
+    - git+https://github.com/dpkp/kafka-python
