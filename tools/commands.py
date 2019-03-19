@@ -17,7 +17,7 @@ def describe_consumer_group(group_name, server_url):
     script_path = find_file_path('kafka-consumer-groups.sh')
     describe_cgroup_params = [script_path, '--bootstrap-server', server_url, '--describe', '--group', group_name]
     p_out, p_err = run_command(describe_cgroup_params)
-    return p_out[:-1]
+    return p_out[:-1].decode()
 
 
 def list_group_topics(description_str):
