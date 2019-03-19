@@ -21,7 +21,7 @@ def describe_consumer_group(group_name, server_url):
 
 
 def list_group_topics(description_str):
-    descr = StringIO.StringIO(description_str)
+    descr = StringIO(description_str)
     descr_df = pd.read_table(descr, sep='\s+|\t+', header=0, engine='python')
 
     print(list(descr_df.TOPIC.unique()))
@@ -31,7 +31,7 @@ def list_group_topics(description_str):
 # use this function to backup current offsets for the topics before the reset offsets
 def save_group_offsets(group_name, path, description_str):
     if path is not None and path != '':
-        descr = StringIO.StringIO(description_str)
+        descr = StringIO(description_str)
         descr_df = pd.read_table(descr, sep='\s+|\t+', header=0, engine='python')
 
         backup_df = descr_df[['TOPIC', 'PARTITION', 'CURRENT-OFFSET']]

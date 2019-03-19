@@ -12,7 +12,11 @@ def run_command(command_params):
 def find_file_path(file_name):
     find_params = ['find', '/', '-type', 'f', '-name', file_name]
     p_out, p_err = run_command(find_params)
-    return p_out[:-1]
+    # when there are multiple files with the same name we will obtain \n-separated list of their paths
+    # so we take the first of them
+    result_str = str.split(p_out[:-1], '\n')[0]
+    # the result remain unchanged if there's only one file found (string contains no delimiters)
+    return result_str
 
 
 def setup_args(args_list):
