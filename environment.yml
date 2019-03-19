@@ -6,6 +6,5 @@ dependencies:
   - requests
   - simplejson
   - pytz
-  - StringIO
   - pip:
     - git+https://github.com/dpkp/kafka-python
