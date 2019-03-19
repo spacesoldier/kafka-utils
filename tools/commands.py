@@ -71,18 +71,18 @@ def reset_topic_offset(group_name, topic_name, server_url, mode, date_str=''):
 
             print('run command: {0}'.format(' '.join(script_params)))
 
-            p_out, p_err = run_command(script_params)
+            p_out_raw, p_err_raw = run_command(script_params)
 
-            print('errors: {0}'.format(p_err))
-
+            print('errors: {0}'.format(p_err_raw.decode()))
+            p_out = p_out_raw.decode()
             if 'Error' not in p_out:
                 print(p_out)
                 print('then reset')
                 script_params.append('--execute')
                 rp_out, rp_err = run_command(script_params)
-                print(rp_err)
+                print(rp_err.decode())
                 print('reset result:')
-                print(rp_out)
+                print(rp_out.decode())
                 print('check the reset result:')
                 print(describe_consumer_group(group_name, server_url))
             else:
