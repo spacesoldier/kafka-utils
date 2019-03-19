@@ -11,6 +11,14 @@ args_conf = [
         "help": "consumer group to describe, '_all_' to describe all consumer groups",
         "metavar": "GROUP"
     },
+
+    {
+        "short": "-s",
+        "full": "--bootstrap-server",
+        "dest": "bootstrap_server",
+        "help": "kafka node server address",
+        "metavar": "BOOTSTRAP_SERVER"
+    },
 ]
 
 
@@ -19,14 +27,16 @@ def describe_consumer_groups(input_args):
     groups = list_consumer_groups(KAFKA_URL)
     print('found {0} groups'.format(len(groups)))
 
+    kafka_node = input_args['bootstrap_server'] if 'bootstrap_server' in input_args.keys() else KAFKA_URL
+
     if 'group' in input_args.keys():
         try:
             if input_args['group'] in groups:
-                print(describe_consumer_group(input_args['group'], KAFKA_URL))
+                print(describe_consumer_group(input_args['group'], kafka_node))
             else:
                 if input_args['group'] == '_all_':
                     for group in groups:
-                        print(describe_consumer_group(group, KAFKA_URL))
+                        print(describe_consumer_group(group, kafka_node))
 
         except Exception as e:
             print(e)

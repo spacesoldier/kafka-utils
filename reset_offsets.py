@@ -34,7 +34,15 @@ args_conf = [
         "dest": "offsets_path",
         "help": "path to directory where the current offsets will be stored",
         "metavar": "OFFSETS_PATH"
-    }
+    },
+
+    {
+        "short": "-s",
+        "full": "--bootstrap-server",
+        "dest": "bootstrap_server",
+        "help": "kafka node server address",
+        "metavar": "BOOTSTRAP_SERVER"
+    },
 ]
 
 
@@ -55,9 +63,11 @@ def reset_offsets_for_topic_in_all_groups(input_args):
 
 
             logs_structure = {}
+            
+            kafka_node = input_args['bootstrap_server'] if 'bootstrap_server' in input_args.keys() else KAFKA_URL
 
             for group in groups:
-                about = describe_consumer_group(group, KAFKA_URL)
+                about = describe_consumer_group(group, kafka_node)
 
                 if 'offsets_path' in input_args.keys():
                     offsets_path = input_args['offsets_path']
@@ -65,7 +75,7 @@ def reset_offsets_for_topic_in_all_groups(input_args):
 
                 logs_structure[group] = list_group_topics(about)
                 if reset_topic == '_all_' or reset_topic in logs_structure[group]:
-                    reset_topic_offset(group, reset_topic, KAFKA_URL, input_args['offset'], reset_date)
+                    reset_topic_offset(group, reset_topic, kafka_node, input_args['offset'], reset_date)
     except Exception as e:
         print(e)
 
