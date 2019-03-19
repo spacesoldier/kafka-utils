@@ -9,7 +9,7 @@ def list_consumer_groups(server_url):
     list_cgroup_params = [script_path, '--bootstrap-server', server_url, '--list']
     p_out, p_err = run_command(list_cgroup_params)
     print(p_out)
-    return p_out[:-1].split('\n')
+    return p_out[:-1].decode().split('\n')
 
 
 def describe_consumer_group(group_name, server_url):
